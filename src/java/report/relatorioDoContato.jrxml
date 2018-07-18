@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioDoContato" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eac4eadb-0f37-4ad6-8c20-3c96cc7f52f5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DATA_INICIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FIM" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     empresa.`codigoCNPJ` AS empresa_codigoCNPJ,
+     empresa.`nomeDaEmpresa` AS empresa_nomeDaEmpresa,
+     contato.`nomeDoContato` AS contato_nomeDoContato,
+     contato.`codigoCPF` AS contato_codigoCPF,
+     contato.`telResidencial` AS contato_telResidencial,
+     contato.`telCelular` AS contato_telCelular,
+     contato.`emailContato` AS contato_emailContato,
+     area.`descricaoDaArea` AS area_descricaoDaArea
+FROM
+     `empresa` empresa,
+     `contato` contato,
+     `area` area
+
+WHERE contato.dataCadastro between $P{DATA_INICIO} and $P{DATA_FIM}]]>
+	</queryString>
+	<field name="empresa_codigoCNPJ" class="java.lang.String"/>
+	<field name="empresa_nomeDaEmpresa" class="java.lang.String"/>
+	<field name="contato_nomeDoContato" class="java.lang.String"/>
+	<field name="contato_codigoCPF" class="java.lang.String"/>
+	<field name="contato_telResidencial" class="java.lang.String"/>
+	<field name="contato_telCelular" class="java.lang.String"/>
+	<field name="contato_emailContato" class="java.lang.String"/>
+	<field name="area_descricaoDaArea" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="702" y="0" width="100" height="18" uuid="63075cfa-ad10-40a4-a413-a7a19bda10c9"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="336" height="51" uuid="0cc4ed76-5c52-4e72-b3d8-a117f9cfce3f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório dos Contatos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="77" height="20" uuid="62dbb184-b78d-489f-a111-00425e211314"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="0" width="107" height="20" uuid="2a4a4152-0690-47c8-99b0-f68638fd7a23"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="0" width="86" height="20" uuid="d8293c15-b58c-4191-8600-cdaf9e76e7d7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contato]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="103" height="20" uuid="1bb9d850-844d-4ba9-9312-74e523db5c87"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contato CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="0" width="82" height="20" uuid="3cf2f892-5776-451a-a27a-3723f067ddab"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="80" height="20" uuid="3b53835e-b003-4e15-9cd6-49fb7d5cdbf5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Celular]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="535" y="0" width="119" height="20" uuid="ea0cb0af-eff2-4fe8-943e-4bb5fdfe52bb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="654" y="0" width="148" height="20" uuid="8bdf771a-f79e-48e1-b9be-d6d2a8ecfa1d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição da Área]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="77" height="20" uuid="e8e99a8b-5f32-4e36-9055-96d42949a6c9"/>
+				<textFieldExpression><![CDATA[$F{empresa_codigoCNPJ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="0" width="107" height="20" uuid="da765019-6188-472b-9e64-365f84865960"/>
+				<textFieldExpression><![CDATA[$F{empresa_nomeDaEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="86" height="20" uuid="436a7148-41cb-445f-93c7-9d5b20cd4879"/>
+				<textFieldExpression><![CDATA[$F{contato_nomeDoContato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="103" height="20" uuid="f6ac2f72-f220-4c32-bfb9-25c272ba1418"/>
+				<textFieldExpression><![CDATA[$F{contato_codigoCPF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="0" width="82" height="20" uuid="921a30a4-2a69-4e1b-8d33-4ae3bafaba75"/>
+				<textFieldExpression><![CDATA[$F{contato_telResidencial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="80" height="20" uuid="ab2ff7ba-0bd7-4b1c-b271-ceaf34e2ffac"/>
+				<textFieldExpression><![CDATA[$F{contato_telCelular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="535" y="0" width="119" height="20" uuid="f254b3ba-9e6c-4740-abc5-7056d9a3746e"/>
+				<textFieldExpression><![CDATA[$F{contato_emailContato}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="654" y="0" width="148" height="20" uuid="7089ad0c-6820-4123-a13f-6fbf5d2b753b"/>
+				<textFieldExpression><![CDATA[$F{area_descricaoDaArea}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20" uuid="b27a224d-dd8c-496b-862d-ac12c4583d1d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

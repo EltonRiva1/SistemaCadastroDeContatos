@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sistema para Cadastro de Contatos</title>
+    </h:head>
+    <h:body>
+        <h:panelGrid columns="2">
+            <h:graphicImage library="imagens" name="CedroTech.jpg" width="150px"></h:graphicImage>
+            <h1>Sistema para Cadastro de Contatos</h1>
+        </h:panelGrid>
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Home" url="index.jsf" icon="ui-icon-home"></p:menuitem>
+                <p:submenu label="Cadastro" icon="ui-icon-gear">
+                    <p:menuitem value="Cadastro de Áreas" url="gerenciar-area.jsf"></p:menuitem>
+                    <p:menuitem value="Cadastro de Empresas" url="gerenciar-empresa.jsf"></p:menuitem>
+                    <p:menuitem value="Cadastro de Contatos" url="gerenciar-contato.jsf"></p:menuitem>
+                </p:submenu>
+                <p:submenu label="Relatórios" icon="ui-icon-document">
+                    <p:menuitem value="Relatórios de Contatos" url="gerenciar-relatorio.jsf"></p:menuitem>
+                </p:submenu>
+                <p:submenu label="Ajuda" icon="ui-icon-help">
+                    <p:menuitem value="Sobre" onclick="PF('dialogsobre').show()"></p:menuitem>
+                </p:submenu>
+            </p:menubar>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" type="button"></p:commandButton>
+                <p:commandButton value="Não" styleClass="ui-confirmdialog-no" type="button"></p:commandButton>
+            </p:confirmDialog>
+            <p:growl id="message" autoUpdate="true"/>
+            <p:dialog header="Sobre o Sistema" widgetVar="dialogsobre" modal="true">
+                <h1>Versão do sistema: 1.0</h1>
+                <h2>Autor: Elton Riva Moura Lima</h2>
+                <h3>E-mail: notleamil@hotmail.com</h3>
+            </p:dialog>
+        </h:form>
+        <hr/>
+        <ui:insert></ui:insert>
+    </h:body>
+</html>

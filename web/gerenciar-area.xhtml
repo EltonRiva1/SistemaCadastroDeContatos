@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:sc="http://xmlns.jcp.org/jsf/composite/sccomp">
+    <h:form id="frm">
+        <p:fieldset legend="Áreas">
+            <sc:toolbarCrud crudBean="#{areaBean}">
+                <p:commandButton value="Excel" ajax="false" rendered="#{areaBean.busca == true}">
+                    <p:dataExporter type="xls" target=":frm:tabelaArea" fileName="area" />
+                </p:commandButton>
+                <p:commandButton value="PDF" ajax="false" rendered="#{areaBean.busca == true}">
+                    <p:dataExporter type="pdf" target=":frm:tabelaArea" fileName="area" />
+                </p:commandButton>
+            </sc:toolbarCrud>
+            <p:panelGrid columns="4" rendered="#{areaBean.busca == true}">
+                <h:outputLabel value="Data Início"></h:outputLabel>
+                <p:calendar value="#{areaBean.entidadeBusca.dataFiltroInicio}" maxdate="#{areaBean.dataAtual}">
+                    <p:ajax event="dateSelect" update="dataFimFiltro"></p:ajax>
+                </p:calendar>
+                <h:outputLabel value="Data Fim"></h:outputLabel>
+                <p:calendar value="#{areaBean.entidadeBusca.dataFiltroFim}" id="dataFimFiltro" mindate="#{areaBean.entidadeBusca.dataFiltroInicio}" maxdate="#{areaBean.dataAtual}"></p:calendar>
+            </p:panelGrid>
+            <p:panelGrid columns="2" rendered="#{areaBean.busca == false}">
+                <h:outputLabel value="Descrição da Área"></h:outputLabel>
+                <p:inputText value="#{areaBean.entidade.descricaoDaArea}" maxlength="15" validatorMessage="Prenchimento obrigatório do campo."></p:inputText>
+                <h:outputLabel value="Data Cadastro"></h:outputLabel>
+                <p:calendar value="#{areaBean.entidade.dataCadastro}" maxdate="#{areaBean.dataAtual}"></p:calendar>
+            </p:panelGrid>
+            <p:dataTable id="tabelaArea" value="#{areaBean.entidades}" var="area" rendered="#{areaBean.busca == true}">
+                <p:column exportable="false">
+                    <p:commandButton value="Editar" icon="ui-icon-pencil" action="#{areaBean.editar(area)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" icon="ui-icon-close" action="#{areaBean.deletar(area)}" update="@form">
+                        <p:confirm message="Tem certeza que deseja excluir?" header="Aviso!" icon="ui-icon-alert"></p:confirm>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Descrição da Área" sortBy="#{area.descricaoDaArea}">
+                    <h:outputText value="#{area.descricaoDaArea}"></h:outputText>
+                </p:column>
+                <p:column headerText="Data Cadastro" sortBy="#{area.dataCadastro}">
+                    <h:outputText value="#{area.dataCadastro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:decorate>

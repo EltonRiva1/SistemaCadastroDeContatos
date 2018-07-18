@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml">
+    <h:form id="frm">
+        <p:fieldset legend="Relatório">
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup>
+                    <p:commandButton value="Emitir" ajax="false">
+                        <p:fileDownload value="#{relatorioContatoBean.emitir()}" />
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+                <p:outputLabel value="Gerar relatório de"/>
+                <h:panelGroup>
+                    <p:calendar value="#{relatorioContatoBean.dataFiltroInicio}" id="dataInicioFiltro" validatorMessage="Data início é necessária!" pattern="dd/MM/yyyy" pages="3" maxdate="#{relatorioContatoBean.dataAtual}">
+                        <p:ajax event="dateSelect" update="dataInicioFiltro"></p:ajax>
+                    </p:calendar>
+                    <p:spacer width="8"/>
+                    <h:outputText value="a"/>
+                    <p:spacer width="8"/>
+                    <p:calendar value="#{relatorioContatoBean.dataFiltroFim}" id="dataFimFiltro" validatorMessage="Data fim é necessária!" pattern="dd/MM/yyyy" pages="3" mindate="#{relatorioContatoBean.dataFiltroInicio}" maxdate="#{relatorioContatoBean.dataAtual}" />
+                </h:panelGroup>
+            </p:panelGrid> 
+        </p:fieldset>
+    </h:form>
+</ui:decorate>
